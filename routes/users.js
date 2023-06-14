@@ -3,19 +3,25 @@ const router = express.Router()
 
 router.use(logger)
 
+router.get("/", (req, res) => {
+  //↓jsonが出力されているのでクエリ文字列から直接その情報を取得できる
+  console.log(req.query.name) 
+  res.send("User List")
+})
+
 router.get("/new", (req, res) => {
-  res.render("users/new");
+  res.render("users/new")
 })
 
 router.post("/", (req, res) => {
   const isValid = false;
   if (isValid) {
-    users.push({ firstName: req.body.firstName });
-    res.redirect(`/users/${users.length - 1}`);
+    users.push({ firstName: req.body.firstName })
+    res.redirect(`/users/${users.length - 1}`)
   } else {
     console.log("Error");
-    console.log(req.body.firstName);
-    res.render('users/new', { firstName: req.body.firstName });
+    console.log(req.body.firstName)
+    res.render('users/new', { firstName: req.body.firstName })
   }
 })
 
@@ -35,11 +41,11 @@ router
 const users = [{ name: "Kyle" }, { name: "Sally" }]
 router.param("id", (req, res, next, id) => {
   req.user = users[id];
-  next();
+  next()
 })
 
 function logger(req, res, next) {
-  next();
+  next()
 }
 
 module.exports = router;
