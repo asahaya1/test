@@ -19,10 +19,12 @@ router.post("/", (req, res) => {
   }
 })
 
-router.get("/:id", (req, res) => {
+router
+  .route("/:id")
+  .get((req, res) => {
   console.log(req.user);
   res.send(`Get User With ID ${req.params.id}`)
-})
+  })
   .put((req, res) => {
     res.send(`Update User With ID ${req.params.id}`)
   })
